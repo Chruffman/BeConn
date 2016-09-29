@@ -13,8 +13,7 @@ Members - Frank Mukendi
 
 Description - Through the simple, user-friendly interface of BeConn, individuals  from all over the world can connect with the community around them.  The user can choose to join or create events in either a pubic or private environment and
 implement BeConn's easy invitation system.
-
-	      We will build a location based event planner using an online service that allows users to arrange events and
+We will build a location based event planner using an online service that allows users to arrange events and
 meetings using a map-based GUI.  Users can drag and drop "pins" onto a map and adjust parameters, including meeting type
 (private/public), date/time, venue type (outdoor/indoor), etc.  Users can also search for events in their area relevant to their needs or interests.
 
