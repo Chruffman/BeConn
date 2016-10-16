@@ -54,6 +54,12 @@
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
           zoom: 6
+
+  	  });
+	//create a listener for placing a marker on the map when a location is clicked
+	  google.maps.event.addListener(map, 'click', function(event) {
+             placeMarker(map, event.latLng);
+	  
         });
         var infoWindow = new google.maps.InfoWindow({map: map});
 
@@ -82,7 +88,21 @@
         infoWindow.setContent(browserHasGeolocation ?
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
+      }  
+      //function for placing the new event marker
+      function placeMarker(map, location) {
+         var eventMarker = new google.maps.Marker({
+           position: location,
+           map: map
+         });
+ 	 var latitude = location.lat();
+	 var longitude = location.lng();
+         var infowindow = new google.maps.InfoWindow({
+            content: 'Latitude: ' + latitude + '<br>Longitude: ' + longitude
+         });
+         infowindow.open(map,eventMarker);
       }
+
     </script>
 
 
