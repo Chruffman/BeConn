@@ -5,11 +5,12 @@
     <title>BeConn</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css?family=Gafata" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster+Two" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="beconnstylesheet.css">
 
+    <script src=src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <style>
       #map {
@@ -28,13 +29,12 @@
           <li><a href="contact.asp">Forum</a></li>
           <li><a href="about.asp">Connect</a></li>
         </ul>
-      <h1 class="headerText"> BeConn </h1>
+      <h1 class="headerText"> Beaconn </h1>
       <p>Sparking activity around the globe</p>
     </div>
 
 
       <div id="map"></div>
-
 
       <div class="Forum">
 
@@ -56,10 +56,12 @@
           zoom: 6
 
   	  });
+
+
 	//create a listener for placing a marker on the map when a location is clicked
 	  google.maps.event.addListener(map, 'click', function(event) {
              placeMarker(map, event.latLng);
-	  
+
         });
         var infoWindow = new google.maps.InfoWindow({map: map});
 
@@ -88,7 +90,7 @@
         infoWindow.setContent(browserHasGeolocation ?
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
-      }  
+      }
       //function for placing the new event marker
       function placeMarker(map, location) {
          var eventMarker = new google.maps.Marker({
