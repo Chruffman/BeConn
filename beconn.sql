@@ -37,12 +37,15 @@ CREATE TABLE IF NOT EXISTS `Location` (
 `Zip` int(1) NOT NULL,
 `#locals` int(1) NOT NULL,
 `Name` varchar(40) NOT NULL,
+`Latitude` int NOT NULL,
+`Longitude` int NOT NULL,
+
 
 PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
-INSERT INTO `Location` (`Id`,`#Events`,`Zip`,`#locals`,`Name`) VALUES
-(1, 1,80022,0,'Commerce City'),
-(2, 1,80302,5,'Boulder'),
-(3, 1,80303,0,'Boulder'),
-(4, 1,80465,0,'Morrison'),
-(5, 1,80202,0,'Denver');
+INSERT INTO `Location` (`Id`,`#Events`,`Zip`,`#locals`,`Name`,`Latitude`,`Longitude`) VALUES
+(1, 1,80022,0,'Commerce City',39.805736, -104.891780),
+(2, 1,80302,5,'Boulder',40.003523, -105.275008),
+(3, 1,80303,0,'Boulder',40.000613, -105.255289),
+(4, 1,80465,0,'Morrison',39.666973, -105.205835),
+(5, 1,80202,0,'Denver',39.742495, -104.996753);
