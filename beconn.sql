@@ -1,21 +1,19 @@
 CREATE TABLE IF NOT EXISTS `Event` (
-`Id` int(1) NOT NULL auto_increment,
-`Name` varchar(40) NOT NULL,
-`Address` varchar(100) NOT NULL,
-`Longitude` float NOT NULL,
-`Latitude` float NOT NULL,
-`Host` varchar(40) NOT NULL,
+`Id` int NOT NULL auto_increment,
+`Name` varchar(200) NOT NULL,
+`Address` varchar(200) NOT NULL,
+`Host` varchar(100) NOT NULL,
 `Time` DATETIME NOT NULL,
- `Zip` int(1) NOT NULL,
+ `Zip` int NOT NULL,
 
 PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
-INSERT INTO `Event` (`Id`, `Name`, `Address`,`Latitude`,`Longitude`,`Host`,`Time`,`Zip`) VALUES
-(1, 'Soccer Pickup', '6000 Victory Way', 39.805736, -104.891780, 'Jane Doe','2016-10-17 02:02:02', 80022),
-(2, 'Shindig', '909 14th Street', 40.003523, -105.275008, 'John Doe','2016-10-18 03:03:03', 80302),
-(3, 'Ping Pong World Series', '770 29th Street', 40.000613, -105.255289, 'Maestro','2016-10-19 04:04:04', 80303),
-(4, 'Concert', '18300 W Almeda Pkwy', 39.666973, -105.205835, 'JJ','2016-10-20 05:05:05', 80465),
-(5, 'Convention', '700 14th Street', 39.742495, -104.996753, 'Jimmy Neutron','2016-10-21 06:06:06', 80202);
+INSERT INTO `Event` (`Id`, `Name`, `Address`,`Host`,`Time`,`Zip`) VALUES
+(1, 'Soccer Pickup', '6000 Victory Way', 'Jane Doe','2016-10-17 02:02:02', 80022),
+(2, 'Shindig', '909 14th Street', 'John Doe','2016-10-18 03:03:03', 80302),
+(3, 'Ping Pong World Series', '770 29th Street', 'Maestro','2016-10-19 04:04:04', 80303),
+(4, 'Concert', '18300 W Almeda Pkwy', 'JJ','2016-10-20 05:05:05', 80465),
+(5, 'Convention', '700 14th Street', 'Jimmy Neutron','2016-10-21 06:06:06', 80202);
 
 CREATE TABLE IF NOT EXISTS `User` (
 `Id` int(1) NOT NULL auto_increment,
