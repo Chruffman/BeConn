@@ -1,0 +1,5 @@
+https://graph.facebook.com/v2.8/ColoradoChautauqua?fields=events%7Bdescription%2Cname%2Cplace%2Cid%2Cstart_time%2Cend_time%2Ccategory%2Cowner%7D&access_token=589387487916245|f4c4c3d5e379b60e74e02dd4428d7e98
+https://graph.facebook.com/v2.8/VisitColorado?fields=events%7Bdescription%2Cname%2Cplace%2Cid%2Cstart_time%2Cend_time%2Ccategory%2Cowner%7D&access_token=589387487916245|f4c4c3d5e379b60e74e02dd4428d7e98
+https://graph.facebook.com/v2.8/cuboulder?fields=events%7Bdescription%2Cname%2Cplace%2Cid%2Cstart_time%2Cend_time%2Ccategory%2Cowner%7D&access_token=589387487916245|f4c4c3d5e379b60e74e02dd4428d7e98
+https://graph.facebook.com/v2.8/LiveNationCO/?fields=events%7Bdescription%2Cname%2Cplace%2Cid%2Cstart_time%2Cend_time%2Ccategory%2Cowner%7D&access_token=589387487916245|f4c4c3d5e379b60e74e02dd4428d7e98
+https://graph.facebook.com/v2.8/cuUMC?fields=events%7Bdescription%2Cname%2Cplace%2Cid%2Cstart_time%2Cend_time%2Ccategory%2Cowner%7D&access_token=589387487916245|f4c4c3d5e379b60e74e02dd4428d7e98
