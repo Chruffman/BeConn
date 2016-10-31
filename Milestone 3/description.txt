@@ -1,0 +1,4 @@
+We will be using MySql as our database tool.
+please see the workbench pdf and database
+screenshot for further information about
+our database.
