@@ -51,7 +51,9 @@
       // prompted by your browser. If you see the error "The Geolocation service
       // failed.", it means you probably did not give permission for the browser to
       // locate you.
-
+      var eventMarker;
+      var createWindow;
+      var markerPlaced = false;
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644}, zoom:14, scrollwheel: false
@@ -61,6 +63,13 @@
 
 	//create a listener for placing a marker on the map when a location is clicked
 	  google.maps.event.addListener(map, 'click', function(event) {
+             if(eventMarker != null) {
+                 eventMarker.setMap(null)
+             }
+             if(createWindow != null){
+                 createWindow.close()
+             }
+             markerPlaced = false
              placeMarker(map, event.latLng);
 
         });
@@ -96,28 +105,42 @@
       //@Author David Munson <munsondd@colorado.edu>
       //@modified 11/6/2016
       function placeMarker(map, location) {
-         var eventMarker = new google.maps.Marker({
-           position: location,
-           map: map
-         });
- 	     var latitude = location.lat();
-         var longitude = location.lng();
-         var htmlInputTable = "<table>" +
-                 "<tr><td>Event Title:</td> <td><input type='text' id='name'/> </td> </tr>" +
-                 "<tr><td>Address:</td> <td><input type='text' id='address'/></td> </tr>" +
-                 "<tr><td>host:</td> <td><input type='text' id='hostName'/></td> </tr>" +
-                 "<tr><td>Description:</td> <td><select id='type'>" +
-                 "<option value='Music' SELECTED>Music</option>" +
-                 "<option value='Sports'>Sports</option>" +
-                 "<option value='Business'>Business</option>" +
-                 "<option value='Assembly'>Assembly</option>" +
-                 "<option value='Social'>Social</option>" +
-                 "</select> </td></tr>" +
-                 "<tr><td></td><td><input type='button' value='create' /></td></tr>";
-         var infowindow = new google.maps.InfoWindow({
-            content: htmlInputTable
-         });
-         infowindow.open(map,eventMarker);
+          if(!markerPlaced) {
+              eventMarker = new google.maps.Marker({
+                  position: location,
+                  map: map
+              });
+              var latitude = location.lat();
+              var longitude = location.lng();
+              var htmlInputTable = "<table>" +
+                      "<tr><td>Event Title:</td> <td><input type='text' id='name'/> </td> </tr>" +
+                      "<tr><td>Address:</td> <td><input type='text' id='address'/></td> </tr>" +
+                      "<tr><td>Host:</td> <td><input type='text' id='hostName'/></td> </tr>" +
+                      "<tr><td>Description:</td> <td><select id='description'>" +
+                      "<option value='Music' SELECTED>Music</option>" +
+                      "<option value='Sports'>Sports</option>" +
+                      "<option value='Business'>Business</option>" +
+                      "<option value='Assembly'>Assembly</option>" +
+                      "<option value='Social'>Social</option>" +
+                      "</select> </td></tr>" +
+                      "<tr><td></td><td><input type='button' value='create' onclick='createAndClose()' /></td>" +
+                      "<td></td><td><input type='button' value='cancel' onclick='cancelAndClose()' /></td></tr>" ;
+              createWindow = new google.maps.InfoWindow({
+                  content: htmlInputTable
+              });
+              createWindow.open(map, eventMarker);
+              markerPlaced = true;
+          }
+      }
+      function createAndClose() {
+          createWindow.close()
+          eventMarker.setMap(null)
+          markerPlaced = false
+      }
+      function cancelAndClose(){
+          createWindow.close()
+          eventMarker.setMap(null)
+          markerPlaced = false
       }
 
     </script>
