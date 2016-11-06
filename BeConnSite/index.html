@@ -92,16 +92,30 @@
                               'Error: The Geolocation service failed.' :
                               'Error: Your browser doesn\'t support geolocation.');
       }
-      //function for placing the new event marker
+      //function for placing a new event marker
+      //@Author David Munson <munsondd@colorado.edu>
+      //@modified 11/6/2016
       function placeMarker(map, location) {
          var eventMarker = new google.maps.Marker({
            position: location,
            map: map
          });
- 	 var latitude = location.lat();
-	 var longitude = location.lng();
+ 	     var latitude = location.lat();
+         var longitude = location.lng();
+         var htmlInputTable = "<table>" +
+                 "<tr><td>Event Title:</td> <td><input type='text' id='name'/> </td> </tr>" +
+                 "<tr><td>Address:</td> <td><input type='text' id='address'/></td> </tr>" +
+                 "<tr><td>host:</td> <td><input type='text' id='hostName'/></td> </tr>" +
+                 "<tr><td>Description:</td> <td><select id='type'>" +
+                 "<option value='Music' SELECTED>Music</option>" +
+                 "<option value='Sports'>Sports</option>" +
+                 "<option value='Business'>Business</option>" +
+                 "<option value='Assembly'>Assembly</option>" +
+                 "<option value='Social'>Social</option>" +
+                 "</select> </td></tr>" +
+                 "<tr><td></td><td><input type='button' value='create' /></td></tr>";
          var infowindow = new google.maps.InfoWindow({
-            content: 'Latitude: ' + latitude + '<br>Longitude: ' + longitude
+            content: htmlInputTable
          });
          infowindow.open(map,eventMarker);
       }
