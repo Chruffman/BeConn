@@ -143,7 +143,7 @@
                  if(createWindow != null){
                      createWindow.close()
                  }
-                 markerPlaced = false
+                 markerPlaced = false;
                  placeMarker(map, event.latLng);
 
             });
@@ -177,15 +177,13 @@
           }
           //function for placing a new event marker
           //@Author David Munson <munsondd@colorado.edu>
-          //@modified 11/6/2016
+          //@modified 11/06/2016
           function placeMarker(map, location) {
               if(!markerPlaced) {
                   eventMarker = new google.maps.Marker({
                       position: location,
                       map: map
                   });
-                  var latitude = location.lat();
-                  var longitude = location.lng();
                   var htmlInputTable = "<table>" +
                           "<tr><td>Event Title:</td> <td><input type='text' id='name'/> </td> </tr>" +
                           "<tr><td>Address:</td> <td><input type='text' id='address'/></td> </tr>" +
@@ -206,17 +204,49 @@
                   markerPlaced = true;
               }
           }
+          function saveData() {
+              var name = escape(document.getElementById("name").value);
+              var address = escape(document.getElementById("address").value);
+              var hostName = escape(document.getElementById("hostName").value);
+              var description = document.getElementById("description").value;
+              var latlng = marker.getPosition();
+
+              var url = "phpsqlinfo_addrow.php?name=" + name + "&address=" + address + "&hostName=" + hostName +
+                      "&description=" + description + "&lat=" + latlng.lat() + "&lng=" + latlng.lng();
+              downloadUrl(url, function(data, responseCode) {
+                  if (responseCode == 200 && data.length >= 1) {
+                      infowindow.close();
+                      document.getElementById("message").innerHTML = "event added.";
+                  }
+              });
+          }
+          function downloadUrl(url, callback) {
+              var request = window.ActiveXObject ?
+                      new ActiveXObject('Microsoft.XMLHTTP') :
+                      new XMLHttpRequest;
+
+              request.onreadystatechange = function() {
+                  if (request.readyState == 4) {
+                      request.onreadystatechange = doNothing;
+                      callback(request.responseText, request.status);
+                  }
+              };
+
+              request.open('GET', url, true);
+              request.send(null);
+          }
           function createAndClose() {
-              createWindow.close()
-              eventMarker.setMap(null)
-              markerPlaced = false
+              saveData();
+              createWindow.close();
+              eventMarker.setMap(null);
+              markerPlaced = false;
           }
           function cancelAndClose(){
-              createWindow.close()
-              eventMarker.setMap(null)
-              markerPlaced = false
+              createWindow.close();
+              eventMarker.setMap(null);
+              markerPlaced = false;
           }
-
+          function doNothing() {}
         </script>
 
               <script async defer
