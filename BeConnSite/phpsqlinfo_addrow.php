@@ -23,14 +23,13 @@ if (!$db_selected) {
 
 // Insert new row with user data
 $query = sprintf("INSERT INTO Event " .
-         " (id, name, address, lat, lng, type ) " .
-         " VALUES (NULL, '%s', '%s', '%s', '%s', '%s');",
+         " (id, name, Address, lat, lng,  ) " .
+         " VALUES (NULL, '%s', '%s', '%s', '%s', '%s',NULL,NULL);",
          mysql_real_escape_string($name),
          mysql_real_escape_string($address),
-         mysql_real_escape_string($hostName),
-         mysql_real_escape_string($lat),
          mysql_real_escape_string($lng),
-         mysql_real_escape_string($description));
+         mysql_real_escape_string($lat),
+         mysql_real_escape_string($hostName));
 
 $result = mysql_query($query);
 
