@@ -7,7 +7,9 @@ $address = $_GET['address'];
 $hostName = $_GET['hostName'];
 $lat = $_GET['lat'];
 $lng = $_GET['lng'];
-$description = $_GET['description'];
+//$time = $_GET['time'];
+$time = $_GET['2000-01-01']; //temporary var for testing purposes
+$zipcode = $_GET['zipcode'];
 
 // Opens a connection to a MySQL server
 $connection=mysql_connect ("localhost", $username, $password);
@@ -23,13 +25,16 @@ if (!$db_selected) {
 
 // Insert new row with user data
 $query = sprintf("INSERT INTO Event " .
-         " (id, name, Address, lat, lng,  ) " .
-         " VALUES (NULL, '%s', '%s', '%s', '%s', '%s',NULL,NULL);",
+         " (Id, Name, Address, Longitude, Latitude, Host, Time, Zip) " .
+         " VALUES (NULL, '%s', '%s', '%s', '%s', '%s','%s','s');",
          mysql_real_escape_string($name),
          mysql_real_escape_string($address),
          mysql_real_escape_string($lng),
          mysql_real_escape_string($lat),
-         mysql_real_escape_string($hostName));
+         mysql_real_escape_string($hostName),
+         mysql_real_escape_string($time),
+         mysql_real_escape_string($zip));
+
 
 $result = mysql_query($query);
 
