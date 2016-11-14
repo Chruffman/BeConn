@@ -33,19 +33,17 @@ INSERT INTO `User` (`Id`,`Username`,`Password`,`Email`,`Zip`) VALUES
 
 CREATE TABLE IF NOT EXISTS `Location` (
 `Id` int(1) NOT NULL auto_increment,
-`#Events` int(1) NOT NULL,
 `Zip` int(1) NOT NULL,
-`#locals` int(1) NOT NULL,
 `Name` varchar(40) NOT NULL,
-`Latitude` int NOT NULL,
-`Longitude` int NOT NULL,
+`Latitude` float(5) NOT NULL,
+`Longitude` float(5) NOT NULL,
 
 
 PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
-INSERT INTO `Location` (`Id`,`#Events`,`Zip`,`#locals`,`Name`,`Latitude`,`Longitude`) VALUES
-(1, 1,80022,0,'Commerce City',39.805736, -104.891780),
-(2, 1,80302,5,'Boulder',40.003523, -105.275008),
-(3, 1,80303,0,'Boulder',40.000613, -105.255289),
-(4, 1,80465,0,'Morrison',39.666973, -105.205835),
-(5, 1,80202,0,'Denver',39.742495, -104.996753);
+INSERT INTO `Location` (`Id`,`Zip`,`Name`,`Latitude`,`Longitude`) VALUES
+(1,80022,'Commerce City',39.805736, -104.891780),
+(2,80302,'Boulder',40.003523, -105.275008),
+(3,80303,'Boulder',40.000613, -105.255289),
+(4,80465,'Morrison',39.666973, -105.205835),
+(5,80202,'Denver',39.742495, -104.996753);

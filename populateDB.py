@@ -22,21 +22,25 @@ def insert_event(url):
             event_dict = events[i]
             IDg = int(event_dict["id"])
             ID = IDg//1000000
-            if (not ("start_time" in event_dict)) : continue			
+            if (not ("start_time" in event_dict)) : continue #ignore event if there is no starting time 		
             time_str = event_dict["start_time"]
             time_datetime = datetime.strptime(time_str,'%Y-%m-%dT%H:%M:%S-%f')	
             name = event_dict["name"]
             owner = event_dict["owner"]
             host = (owner["name"])
+            if (not ("place" in event_dict)) : continue
             place = event_dict["place"]
             if (not ("location" in place)) : continue
             location = place["location"]
             address = location["street"] if "street" in location else location["city"] + " "+ location["state"]
-            #latitude = float(location["latitude"])
-            #longitude = float(location["longitude"])
+            city = location["city"] 
+            latitude = float(location["latitude"])
+            print(latitude)
+            longitude = float(location["longitude"])
             Zip = location["zip"] if "zip" in location else "0"
             zipcode = int(Zip[0:5])
             cur.execute("REPLACE INTO Event (Id,Name, Address,Host,Time,Zip) VALUES(%s,%s,%s,%s,%s,%s)",(ID,name, address,host,time_datetime,zipcode))
+            cur.execute("REPLACE INTO Location (Id,Zip, Name,Latitude,Longitude) VALUES(%s,%s,%s,%s,%s)",(ID,zipcode, city,latitude,longitude))
          except UnicodeEncodeError:
             continue
 
