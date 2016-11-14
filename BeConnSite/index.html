@@ -205,7 +205,7 @@
               var hostName = escape(document.getElementById("hostName").value);
               var time = document.getElementById("time").value;
               var zipcode = document.getElementById("zipcode").value;
-              var latlng = marker.getPosition();
+              var latlng = eventMarker.getPosition();
 
               var url = "phpsqlinfo_addrow.php?name=" + name + "&address=" + address + "&hostName=" + hostName +
                       "&time=" + time + "&zipcode" + zipcode + "&lat=" + latlng.lat() + "&lng=" + latlng.lng();
