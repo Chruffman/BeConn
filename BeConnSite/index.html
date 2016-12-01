@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lobster+Two" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100" rel="stylesheet">
 
-    <script src=src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <style>
       #map {
@@ -143,7 +143,7 @@
                  if(createWindow != null){
                      createWindow.close()
                  }
-                 markerPlaced = false
+                 markerPlaced = false;
                  placeMarker(map, event.latLng);
 
             });
@@ -177,27 +177,20 @@
           }
           //function for placing a new event marker
           //@Author David Munson <munsondd@colorado.edu>
-          //@modified 11/6/2016
+          //@modified 11/06/2016
           function placeMarker(map, location) {
               if(!markerPlaced) {
                   eventMarker = new google.maps.Marker({
                       position: location,
                       map: map
                   });
-                  var latitude = location.lat();
-                  var longitude = location.lng();
                   var htmlInputTable = "<table>" +
                           "<tr><td>Event Title:</td> <td><input type='text' id='name'/> </td> </tr>" +
                           "<tr><td>Address:</td> <td><input type='text' id='address'/></td> </tr>" +
                           "<tr><td>Host:</td> <td><input type='text' id='hostName'/></td> </tr>" +
-                          "<tr><td>Description:</td> <td><select id='description'>" +
-                          "<option value='Music' SELECTED>Music</option>" +
-                          "<option value='Sports'>Sports</option>" +
-                          "<option value='Business'>Business</option>" +
-                          "<option value='Assembly'>Assembly</option>" +
-                          "<option value='Social'>Social</option>" +
-                          "</select> </td></tr>" +
-                          "<tr><td></td><td><input type='button' value='create' onclick='createAndClose()' /></td>" +
+                          "<tr><td>Time:</td> <td><input type='timestamp' id='time'></td></tr>" +
+                          "<tr><td>zipcode:</td> <td><input type='text' id='zipcode'/></td> </tr>" +
+                          "<tr><td></td><td><input id = 'create' type='button' value='create' /></td>" +
                           "<td></td><td><input type='button' value='cancel' onclick='cancelAndClose()' /></td></tr>" ;
                   createWindow = new google.maps.InfoWindow({
                       content: htmlInputTable
@@ -206,17 +199,50 @@
                   markerPlaced = true;
               }
           }
-          function createAndClose() {
-              createWindow.close()
-              eventMarker.setMap(null)
-              markerPlaced = false
-          }
-          function cancelAndClose(){
-              createWindow.close()
-              eventMarker.setMap(null)
-              markerPlaced = false
-          }
 
+          $(document).ready(function(){
+            $("*").on('click','#create', function(){
+              console.log("entered");
+              var name = $("#name").val();
+              var address = $("#address").val();
+              var hostname = $("#hostName").val();
+              var time = $("#time").val();
+              var zipcode = $("#zipcode").val();
+              var latlng = eventMarker.getPosition();
+// Returns successful data submission message when the entered information is stored in database.
+              if(name==''||address==''||hostname==''||time==''||zipcode=="")
+              {
+                alert("Please Fill All Fields");
+              }
+              else
+              {
+                
+// AJAX Code To Submit Form.
+                $.ajax({
+                  type: 'POST',
+                  url: 'ajaxcreate.php',
+                  
+		  data: {name: name, address: address, hostname: hostname, time: time, zipcode: zipcode
+                  ,lat: latlng.lat(), lng: latlng.lng()},
+  
+                  cache: false,
+                  success: function(result){
+                    console.log("success");
+                    alert(result);
+                  }
+                });
+                createWindow.close();
+                eventMarker.setMap(null);
+                markerPlaced = false;
+              }
+              return false;
+            });
+          });
+          function cancelAndClose(){
+              createWindow.close();
+              eventMarker.setMap(null);
+              markerPlaced = false;
+          }
         </script>
 
               <script async defer
