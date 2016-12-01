@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lobster+Two" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Raleway:100" rel="stylesheet">
 
-    <script src=src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     <style>
       #map {
@@ -201,29 +201,33 @@
           }
 
           $(document).ready(function(){
-            $("#create").click(function(){
+            $("*").on('click','#create', function(){
+              console.log("entered");
               var name = $("#name").val();
               var address = $("#address").val();
-              var hostname = $("#hostname").val();
+              var hostname = $("#hostName").val();
               var time = $("#time").val();
               var zipcode = $("#zipcode").val();
               var latlng = eventMarker.getPosition();
 // Returns successful data submission message when the entered information is stored in database.
-              var dataString = 'name='+ name + '&address='+ address + '&hostname='+ hostname + '&time='+ time + '&zipcode=' + zipcode
-                      +'&lat='+ latlng.lat() + '$lng=' + latlng.lng() ;
               if(name==''||address==''||hostname==''||time==''||zipcode=="")
               {
                 alert("Please Fill All Fields");
               }
               else
               {
+                
 // AJAX Code To Submit Form.
                 $.ajax({
-                  type: "POST",
-                  url: "phpsqlinfo_addrow.php",
-                  data: dataString,
+                  type: 'POST',
+                  url: 'ajaxcreate.php',
+                  
+		  data: {name: name, address: address, hostname: hostname, time: time, zipcode: zipcode
+                  ,lat: latlng.lat(), lng: latlng.lng()},
+  
                   cache: false,
                   success: function(result){
+                    console.log("success");
                     alert(result);
                   }
                 });
